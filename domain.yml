@@ -1,34 +1,91 @@
-version: "3.1"
-
+version: "2.0"
 intents:
   - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - select_service
+  - choose_document
+  - apply_scheme
+  - invalid_selection
+  - get_document
+  - choose_online_application
+  - choose_csc_application
+  - provide_phone_number
+  - provide_gpu_id
+  - provide_name
+  - provide_location
+
+slots:
+  phone_number:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+
+  gpu_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+
+  name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+
+  location:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_text
+
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+    - text: "Hello, my name is SajiloSewak."
+  
+  utter_service_prompt:
+    - text: "Select your option for services:\n1. E-services."
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_service_selected:
+    - text: "Great! What E-Services would you like to have?\n1. Get your Document\n2. Apply for a Scheme."
 
-  utter_did_that_help:
-  - text: "Did that help you?"
+  utter_invalid_selection:
+    - text: "Sorry, I didn't understand that. Please select a valid option by typing 1 for E-Services or writing 'E-Services'."
 
-  utter_happy:
-  - text: "Great, carry on!"
+  utter_document:
+    - text: "You have selected 'Get your Document'. Please follow the next steps to retrieve it."
 
-  utter_goodbye:
-  - text: "Bye"
+  utter_scheme:
+    - text: "You have selected 'Apply for a Scheme'. Please provide the required details to proceed."
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_ask_document_type:
+    - text: "You can apply for the following documents: SC/ST Certificate, Marriage Certificate, Unmarried Certificate, or any other type of document."
 
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  utter_ask_application_type:
+    - text: "Would you like to apply for the document online yourself, or get the document applied through a Local CSC (Common Service Center)?"
+
+  utter_apply_online:
+    - text: "You can apply for your document online using the following website: https://sso.sikkim.gov.in/account/login. Please follow the instructions on the website to complete your application."
+
+  utter_ask_phone_number:
+    - text: "Please provide your phone number."
+
+  utter_ask_gpu_id:
+    - text: "Please provide your GPU-ID (Village-level ID)."
+
+  utter_ask_name:
+    - text: "Please provide your full name."
+
+  utter_ask_location:
+    - text: "Please provide your location (for proximity to the service)."
+
+  utter_csc_confirmation:
+    - text: "Thank you! We have saved your details in our database. Please call the CSC operator at [Operator's Phone Number] to follow up on your application. Your details have been shared with the CSC operator, and they will assist you in completing the application process."
+actions:
+  - utter_greet
+  - utter_service_prompt
+  - utter_service_selected
+  - utter_invalid_selection
+  - utter_document
+  - utter_scheme
+  - action_save_user_data

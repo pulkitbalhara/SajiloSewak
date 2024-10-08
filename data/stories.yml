@@ -1,30 +1,52 @@
-version: "3.1"
-
+version: "2.0"
 stories:
+  - story: greet and ask for services
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_service_prompt
 
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+  - story: user selects e-services
+    steps:
+      - intent: select_service
+      - action: utter_service_selected
 
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+  - story: user chooses to get document
+    steps:
+      - intent: choose_document
+      - action: utter_document
 
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - story: user chooses to apply for a scheme
+    steps:
+      - intent: apply_scheme
+      - action: utter_scheme
+
+  - story: user gives invalid input
+    steps:
+      - intent: invalid_selection
+      - action: utter_invalid_selection
+
+  - story: user applies for a document online
+    steps:
+      - intent: get_document
+      - action: utter_ask_document_type
+      - intent: choose_online_application
+      - action: utter_apply_online
+
+  - story: user applies for a document through CSC
+    steps:
+      - intent: get_document
+      - action: utter_ask_document_type
+      - intent: choose_csc_application
+      - action: utter_ask_phone_number
+      - intent: provide_phone_number
+      - action: utter_ask_gpu_id
+      - intent: provide_gpu_id
+      - action: utter_ask_name
+      - intent: provide_name
+      - action: utter_ask_location
+      - intent: provide_location
+      - action: action_save_user_data
+      - action: utter_csc_confirmation
+
+

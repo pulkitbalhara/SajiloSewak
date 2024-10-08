@@ -1,91 +1,84 @@
-version: "3.1"
-
+version: "2.0"
 nlu:
-- intent: greet
-  examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
-    - good morning
-    - good evening
-    - moin
-    - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+  - intent: greet
+    examples: |
+      - Hi
+      - Hello
+      - Hey
+      - Hi there
+      - Hello, SajiloSewak
+      - Hey SajiloSewak
 
-- intent: goodbye
-  examples: |
-    - cu
-    - good by
-    - cee you later
-    - good night
-    - bye
-    - goodbye
-    - have a nice day
-    - see you around
-    - bye bye
-    - see you later
+  - intent: select_service
+    examples: |
+      - 1
+      - E-services
+      - I want E-Services
+      - I need E-Services
+      - Select E-Services
+      - Choose E-services
 
-- intent: affirm
-  examples: |
-    - yes
-    - y
-    - indeed
-    - of course
-    - that sounds good
-    - correct
+  - intent: choose_document
+    examples: |
+      - Get your Document
+      - Get my Document
+      - I want my Document
+      - I need a document
 
-- intent: deny
-  examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
-    - not really
+  - intent: apply_scheme
+    examples: |
+      - Apply for a Scheme
+      - I want to apply for a scheme
+      - Apply for scheme
+      - I need a scheme application
 
-- intent: mood_great
-  examples: |
-    - perfect
-    - great
-    - amazing
-    - feeling like a king
-    - wonderful
-    - I am feeling very good
-    - I am great
-    - I am amazing
-    - I am going to save the world
-    - super stoked
-    - extremely good
-    - so so perfect
-    - so good
-    - so perfect
+  - intent: invalid_selection
+    examples: |
+      - I don't understand
+      - What are my options again?
+      - Can you repeat the options?
+      - This doesn't make sense
 
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
+  - intent: get_document
+    examples: |
+      - I want to get a document
+      - Get a document
+      - Apply for a document
+      - I need to apply for a document
 
-- intent: bot_challenge
-  examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
+  - intent: choose_online_application
+    examples: |
+      - I want to apply online
+      - I will apply online myself
+      - I will use the online service
+      - Apply online
+
+  - intent: choose_csc_application
+    examples: |
+      - I want to apply through CSC
+      - Apply through CSC
+      - I prefer to apply through the CSC center
+
+  - intent: provide_phone_number
+    examples: |
+      - My phone number is [9876543210](phone_number)
+      - 9876543210
+      - [1234567890](phone_number)
+
+  - intent: provide_gpu_id
+    examples: |
+      - My GPU-ID is [GP1234](gpu_id)
+      - GPU-ID [GP4567](gpu_id)
+      - [GP9876](gpu_id)
+
+  - intent: provide_name
+    examples: |
+      - My name is [John Doe](name)
+      - I am [Jane Smith](name)
+      - [Robert Brown](name)
+
+  - intent: provide_location
+    examples: |
+      - I am located at [Gangtok](location)
+      - I live in [Namchi](location)
+      - My location is [Geyzing](location)

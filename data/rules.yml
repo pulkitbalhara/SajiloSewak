@@ -1,13 +1,14 @@
-version: "3.1"
-
+version: "2.0"
 rules:
+  - rule: greet and offer services
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_service_prompt
 
-- rule: Say goodbye anytime the user says goodbye
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye
+  - rule: select e-services and offer sub-options
+    steps:
+      - intent: select_service
+      - action: utter_service_selected
 
-- rule: Say 'I am a bot' anytime the user challenges
-  steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+ 
