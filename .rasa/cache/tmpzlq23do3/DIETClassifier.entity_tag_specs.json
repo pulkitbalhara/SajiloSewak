@@ -1,0 +1,44 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-gpu_id",
+      "2": "I-gpu_id",
+      "3": "L-gpu_id",
+      "4": "U-gpu_id",
+      "5": "B-location",
+      "6": "I-location",
+      "7": "L-location",
+      "8": "U-location",
+      "9": "B-name",
+      "10": "I-name",
+      "11": "L-name",
+      "12": "U-name",
+      "13": "B-phone_number",
+      "14": "I-phone_number",
+      "15": "L-phone_number",
+      "16": "U-phone_number",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-gpu_id": 1,
+      "I-gpu_id": 2,
+      "L-gpu_id": 3,
+      "U-gpu_id": 4,
+      "B-location": 5,
+      "I-location": 6,
+      "L-location": 7,
+      "U-location": 8,
+      "B-name": 9,
+      "I-name": 10,
+      "L-name": 11,
+      "U-name": 12,
+      "B-phone_number": 13,
+      "I-phone_number": 14,
+      "L-phone_number": 15,
+      "U-phone_number": 16,
+      "O": 0
+    },
+    "num_tags": 17
+  }
+]
