@@ -1,52 +1,47 @@
-version: "2.0"
+version: "3.1"
+
 stories:
-  - story: greet and ask for services
-    steps:
-      - intent: greet
-      - action: utter_greet
-      - action: utter_service_prompt
 
-  - story: user selects e-services
-    steps:
-      - intent: select_service
-      - action: utter_service_selected
+- story: apply_for_scheme_with_form
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - action: utter_options
+    - intent: apply_scheme  # User chooses to apply for a scheme
+    - action: utter_ask_scheme_type
+    - intent: select_scheme
+      entities:
+        - scheme_name: "Pradhan Mantri Awas Yojana"
+    - action: apply_scheme_form  # Trigger the form to collect user details
+    - active_loop: apply_scheme_form
+    - intent: provide_name
+      entities:
+        - person_name: "John Doe"
+    - intent: provide_contact_number
+      entities:
+        - contact_number: "9876543210"
+    - intent: provide_gp_name
+      entities:
+        - gp_name: "Bhagwanpur"
+    - active_loop: null  # End the form
+    - action: action_confirm_application
+    - action: utter_follow_up_options
+    - intent: affirm  # User chooses to continue
+    - action: utter_options
 
-  - story: user chooses to get document
-    steps:
-      - intent: choose_document
-      - action: utter_document
-
-  - story: user chooses to apply for a scheme
-    steps:
-      - intent: apply_scheme
-      - action: utter_scheme
-
-  - story: user gives invalid input
-    steps:
-      - intent: invalid_selection
-      - action: utter_invalid_selection
-
-  - story: user applies for a document online
-    steps:
-      - intent: get_document
-      - action: utter_ask_document_type
-      - intent: choose_online_application
-      - action: utter_apply_online
-
-  - story: user applies for a document through CSC
-    steps:
-      - intent: get_document
-      - action: utter_ask_document_type
-      - intent: choose_csc_application
-      - action: utter_ask_phone_number
-      - intent: provide_phone_number
-      - action: utter_ask_gpu_id
-      - intent: provide_gpu_id
-      - action: utter_ask_name
-      - intent: provide_name
-      - action: utter_ask_location
-      - intent: provide_location
-      - action: action_save_user_data
-      - action: utter_csc_confirmation
-
-
+- story: get_emergency_contact_with_form
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - action: utter_options
+    - intent: query_contact  # User chooses to get emergency contact details
+    - action: emergency_contact_form  # Trigger the form to collect user details
+    - active_loop: emergency_contact_form
+    - intent: select_contact_type
+      entities:
+        - contact_type: "Medical Assistance"
+    - active_loop: null  # End the form
+    - action: utter_contact_details
+    - action: utter_follow_up_options
+    - intent: deny  # User ends conversation
+    - action: utter_goodbye

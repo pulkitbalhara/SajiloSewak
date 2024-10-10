@@ -1,91 +1,145 @@
-version: "2.0"
+# Domain and Forms for Sajilo Sewa Chatbot
+# This file includes the intents, entities, slots, responses, forms, and actions used by the chatbot.
+
+version: "3.1"
+
 intents:
   - greet
-  - select_service
-  - choose_document
   - apply_scheme
-  - invalid_selection
-  - get_document
-  - choose_online_application
-  - choose_csc_application
-  - provide_phone_number
-  - provide_gpu_id
+  - select_scheme
+  - query_contact
   - provide_name
-  - provide_location
+  - provide_contact_number
+  - provide_gp_name
+  - affirm
+  - deny
+  - out_of_scope
+  - end_conversation
+  - speak_agent
+  - learn_services
+  - select_contact_type
+
+entities:
+  - scheme_name
+  - contact_type
+  - person_name
+  - contact_number
+  - gp_name
 
 slots:
-  phone_number:
+  scheme_name:
     type: text
-    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: scheme_name
+  contact_type:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: contact_type
+  person_name:
+    type: text
     mappings:
       - type: from_text
-
-  gpu_id:
+  contact_number:
     type: text
-    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: contact_number
+  gp_name:
+    type: text
     mappings:
       - type: from_text
-
-  name:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_text
-
-  location:
-    type: text
-    influence_conversation: false
-    mappings:
-      - type: from_text
-
 
 responses:
-  utter_greet:
-    - text: "Hello, my name is SajiloSewak."
-  
-  utter_service_prompt:
-    - text: "Select your option for services:\n1. E-services."
-
   utter_service_selected:
-    - text: "Great! What E-Services would you like to have?\n1. Get your Document\n2. Apply for a Scheme."
+  - text: "You have selected the service. How would you like to proceed?"
+  utter_greet:
+    - text: "Hello! How can I assist you today?"
 
-  utter_invalid_selection:
-    - text: "Sorry, I didn't understand that. Please select a valid option by typing 1 for E-Services or writing 'E-Services'."
+  utter_options:
+    - text: "Please choose one of the following options:"
+      buttons:
+        - title: "Apply for a Certificate or Scheme"
+          payload: "/apply_scheme"
+        - title: "Get Emergency Contact Details"
+          payload: "/query_contact"
+        - title: "Learn About Available Services"
+          payload: "/learn_services"
+        - title: "Speak to an Agent"
+          payload: "/speak_agent"
 
-  utter_document:
-    - text: "You have selected 'Get your Document'. Please follow the next steps to retrieve it."
+  utter_ask_scheme_type:
+    - text: "Which type of certificate or scheme would you like to apply for?"
+      buttons:
+        - title: "Pradhan Mantri Awas Yojana"
+          payload: "/select_scheme{{\"scheme_name\": \"Pradhan Mantri Awas Yojana\"}}"
+        - title: "Birth Certificate"
+          payload: "/select_scheme{{\"scheme_name\": \"Birth Certificate\"}}"
+        - title: "Income Certificate"
+          payload: "/select_scheme{{\"scheme_name\": \"Income Certificate\"}}"
+        - title: "Other"
+          payload: "/select_scheme{{\"scheme_name\": \"Other\"}}"
 
-  utter_scheme:
-    - text: "You have selected 'Apply for a Scheme'. Please provide the required details to proceed."
-
-  utter_ask_document_type:
-    - text: "You can apply for the following documents: SC/ST Certificate, Marriage Certificate, Unmarried Certificate, or any other type of document."
-
-  utter_ask_application_type:
-    - text: "Would you like to apply for the document online yourself, or get the document applied through a Local CSC (Common Service Center)?"
-
-  utter_apply_online:
-    - text: "You can apply for your document online using the following website: https://sso.sikkim.gov.in/account/login. Please follow the instructions on the website to complete your application."
-
-  utter_ask_phone_number:
-    - text: "Please provide your phone number."
-
-  utter_ask_gpu_id:
-    - text: "Please provide your GPU-ID (Village-level ID)."
-
-  utter_ask_name:
+  utter_collect_details:
     - text: "Please provide your full name."
 
-  utter_ask_location:
-    - text: "Please provide your location (for proximity to the service)."
+  utter_ask_contact_number:
+    - text: "Thank you, {person_name}. Could you please provide your contact number?"
 
-  utter_csc_confirmation:
-    - text: "Thank you! We have saved your details in our database. Please call the CSC operator at [Operator's Phone Number] to follow up on your application. Your details have been shared with the CSC operator, and they will assist you in completing the application process."
+  utter_ask_gp_name:
+    - text: "Great! Could you also let me know your Gram Panchayat (GP) name?"
+
+  utter_follow_up_options:
+    - text: "Would you like to do anything else? Please choose:"
+      buttons:
+        - title: "Apply for another scheme"
+          payload: "/apply_scheme"
+        - title: "Get Emergency Contacts"
+          payload: "/query_contact"
+        - title: "Learn About Available Services"
+          payload: "/learn_services"
+        - title: "End Conversation"
+          payload: "/end_conversation"
+
+  utter_ask_contact_type:
+    - text: "I can provide emergency contact details. Please select the type of emergency contact you need:"
+      buttons:
+        - title: "Medical Assistance"
+          payload: "/select_contact_type{{\"contact_type\": \"Medical Assistance\"}}"
+        - title: "Fire Services"
+          payload: "/select_contact_type{{\"contact_type\": \"Fire Services\"}}"
+        - title: "Police Assistance"
+          payload: "/select_contact_type{{\"contact_type\": \"Police Assistance\"}}"
+        - title: "Disaster Helpline"
+          payload: "/select_contact_type{{\"contact_type\": \"Disaster Helpline\"}}"
+
+  utter_contact_details:
+    - text: "The medical emergency contact number is 108. You can also reach the local health center at 123-456-7890."
+
+  utter_services_list:
+    - text: "Here are some of the services I can assist you with: Applying for a scheme, Getting emergency contacts, Learning about available services, and Connecting with an agent."
+
+  utter_connecting_agent:
+    - text: "Connecting you to an agent. Please hold on."
+
+  utter_goodbye:
+    - text: "You're welcome! Have a great day!"
+
+forms:
+  apply_scheme_form:
+    required_slots:
+      - scheme_name
+      - person_name
+      - contact_number
+      - gp_name
+
+  emergency_contact_form:
+    required_slots:
+      - contact_type
+
 actions:
-  - utter_greet
-  - utter_service_prompt
-  - utter_service_selected
-  - utter_invalid_selection
-  - utter_document
-  - utter_scheme
-  - action_save_user_data
+  - action_confirm_application
+  - validate_apply_scheme_form
+  - action_store_form_data  # Custom action to store form data in a pandas DataFrame
+  - utter_contact_details

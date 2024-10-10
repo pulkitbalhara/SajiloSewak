@@ -1,0 +1,52 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-contact_number",
+      "2": "I-contact_number",
+      "3": "L-contact_number",
+      "4": "U-contact_number",
+      "5": "B-contact_type",
+      "6": "I-contact_type",
+      "7": "L-contact_type",
+      "8": "U-contact_type",
+      "9": "B-gp_name",
+      "10": "I-gp_name",
+      "11": "L-gp_name",
+      "12": "U-gp_name",
+      "13": "B-person_name",
+      "14": "I-person_name",
+      "15": "L-person_name",
+      "16": "U-person_name",
+      "17": "B-scheme_name",
+      "18": "I-scheme_name",
+      "19": "L-scheme_name",
+      "20": "U-scheme_name",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-contact_number": 1,
+      "I-contact_number": 2,
+      "L-contact_number": 3,
+      "U-contact_number": 4,
+      "B-contact_type": 5,
+      "I-contact_type": 6,
+      "L-contact_type": 7,
+      "U-contact_type": 8,
+      "B-gp_name": 9,
+      "I-gp_name": 10,
+      "L-gp_name": 11,
+      "U-gp_name": 12,
+      "B-person_name": 13,
+      "I-person_name": 14,
+      "L-person_name": 15,
+      "U-person_name": 16,
+      "B-scheme_name": 17,
+      "I-scheme_name": 18,
+      "L-scheme_name": 19,
+      "U-scheme_name": 20,
+      "O": 0
+    },
+    "num_tags": 21
+  }
+]
