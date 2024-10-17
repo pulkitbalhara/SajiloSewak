@@ -1,0 +1,22 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+
+ 
+- story: Apply for a scheme
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: utter_options
+  - intent: scheme_apply
+  - action: utter_list_of_schemes
+  - action: scheme_apply_form
+  - active_loop: scheme_apply_form
+
+

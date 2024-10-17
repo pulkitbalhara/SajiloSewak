@@ -1,0 +1,63 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - scheme_apply
+  - certificate_apply
+  - get_emergency_contact
+  - report_grievance
+  - report_disaster
+  - scheme_know
+
+slots:
+  scheme_name:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: scheme_name
+  phone_number:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: phone_number
+  GPU_location:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: GPU_location
+
+
+responses:
+  utter_greet:
+    - text: "Hello, my name is SajiloSewak. How can I assist you today?"
+
+  utter_options:
+    - text: "I can help you with the following:\n1. Know a Scheme\n2. Enroll in a Scheme\n3. Apply for a Certificate\n4. Report a Grievance\n5. Report a Disaster"
+
+  utter_list_of_schemes:
+    - text: "Here are some schemes you can apply for:\n- Pradhan Mantri Awas Yojana\n- Ayushman Bharat\n- PM Kisan Yojana\n- Startup India\n- Mudra Loan Scheme\nPlease mention which one you want to apply for."
+
+  utter_details_submitted:
+    - text: "Your application for the {scheme_name} scheme with contact number {phone_number} from {GPU_location} is successfully submitted. We will connect with you shortly."
+
+  utter_goodbye:
+  - text: "Bye"
+
+forms:
+  scheme_apply_form:
+    required_slots:
+      - scheme_name
+      - phone_number
+      - GPU_location
+
+entities:
+  - scheme_name
+  - phone_number
+  - GPU_location
+
+actions:
+  - action_submit_scheme_form

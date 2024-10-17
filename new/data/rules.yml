@@ -1,0 +1,18 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Submit the scheme apply form
+  condition:
+    - active_loop: scheme_apply_form
+  steps:
+    - action: scheme_apply_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_submit_scheme_form

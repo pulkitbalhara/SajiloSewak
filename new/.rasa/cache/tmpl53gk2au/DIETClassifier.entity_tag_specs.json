@@ -1,0 +1,44 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-GPU_location",
+      "2": "I-GPU_location",
+      "3": "L-GPU_location",
+      "4": "U-GPU_location",
+      "5": "B-phone_number",
+      "6": "I-phone_number",
+      "7": "L-phone_number",
+      "8": "U-phone_number",
+      "9": "B-scheme",
+      "10": "I-scheme",
+      "11": "L-scheme",
+      "12": "U-scheme",
+      "13": "B-scheme_name",
+      "14": "I-scheme_name",
+      "15": "L-scheme_name",
+      "16": "U-scheme_name",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-GPU_location": 1,
+      "I-GPU_location": 2,
+      "L-GPU_location": 3,
+      "U-GPU_location": 4,
+      "B-phone_number": 5,
+      "I-phone_number": 6,
+      "L-phone_number": 7,
+      "U-phone_number": 8,
+      "B-scheme": 9,
+      "I-scheme": 10,
+      "L-scheme": 11,
+      "U-scheme": 12,
+      "B-scheme_name": 13,
+      "I-scheme_name": 14,
+      "L-scheme_name": 15,
+      "U-scheme_name": 16,
+      "O": 0
+    },
+    "num_tags": 17
+  }
+]
