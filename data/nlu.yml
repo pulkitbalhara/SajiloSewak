@@ -1,154 +1,57 @@
-# NLU Training Data for Sajilo Sewa Chatbot
-# This file contains detailed training data for various intents, entities, and example phrases
-# to help the chatbot understand different user inputs.
-
 version: "3.1"
 
 nlu:
-
-  # Intent: greet
   - intent: greet
     examples: |
-      - Hi
-      - Hello
-      - Hey
-      - Hi there!
-      - Good morning
-      - Good evening
-      - Howdy
-      - Greetings
+      - hello
+      - hi
+      - hey
+      - good morning
+      - good evening
+      - hey there
 
-  # Intent: apply_scheme
   - intent: apply_scheme
     examples: |
-      - I want to apply for a certificate
-      - I need to apply for a [scheme](scheme_name)
-      - How can I apply for [Pradhan Mantri Awas Yojana](scheme_name)?
-      - Help me apply for [Income Certificate](scheme_name)
-      - Can I apply for [Birth Certificate](scheme_name)?
-      - I would like to apply for a government scheme
+      - I want to apply for a scheme
+      - I want to apply for Pradhan Mantri Awas Yojana
+      - Can I apply for a government scheme?
       - Apply for a scheme
-      - I need help applying for a scheme
-      - Please assist me in applying for the [Income Certificate](scheme_name)
+      - How can I apply for the housing scheme?
 
-  # Intent: select_scheme
   - intent: select_scheme
     examples: |
-      - I would like to choose [Pradhan Mantri Awas Yojana](scheme_name)
-      - Select [Income Certificate](scheme_name)
-      - I want [Birth Certificate](scheme_name)
-      - [Other](scheme_name)
-      - Choose [Pradhan Mantri Awas Yojana](scheme_name)
-      - I need [Income Certificate](scheme_name)
+      - I want to apply for [Pradhan Mantri Awas Yojana](scheme_name)
+      - Apply for [Pradhan Mantri Awas Yojana](scheme_name)
+      - [Pradhan Mantri Awas Yojana](scheme_name)
+      - I choose [Pradhan Mantri Awas Yojana](scheme_name)
 
-  # Intent: query_contact
-  - intent: query_contact
+  - intent: query_emergency_contact
     examples: |
       - I need emergency contact details
-      - Please give me the emergency contacts
-      - Who should I contact in an emergency?
-      - I need the number for [medical assistance](contact_type)
-      - Give me the [fire service](contact_type) contact number
-      - What is the [police](contact_type) contact number?
-      - Can you provide [disaster helpline](contact_type) details?
-      - I want the [fire services](contact_type) number
+      - Can you give me emergency contact numbers?
+      - I need contact information for emergencies
+      - Please provide emergency contacts
 
-  # Intent: provide_name
-  - intent: provide_name
+  - intent: emergency_contact_type
     examples: |
-      - My name is [John Doe](person_name)
-      - I am [Jane Smith](person_name)
-      - It's [Neeraj](person_name)
-      - Call me [Divya](person_name)
-      - [Ravi Sharma](person_name)
-      - The name is [Suman](person_name)
+      - I need contact for [Hospital](em_contact_type)
+      - Give me the [Hospital](em_contact_type) number
+      - Contact for [Hospital](em_contact_type)
+      - I need [Hospital](em_contact_type) contact details
 
-  # Intent: provide_contact_number
-  - intent: provide_contact_number
-    examples: |
-      - My contact number is [9876543210](contact_number)
-      - You can reach me at [1234567890](contact_number)
-      - The number is [0987654321](contact_number)
-      - [9876543210](contact_number)
-      - Here is my contact: [9123456789](contact_number)
-
-  # Intent: provide_gp_name
-  - intent: provide_gp_name
-    examples: |
-      - My Gram Panchayat is [Bhagwanpur](gp_name)
-      - I belong to [Rampur GP](gp_name)
-      - It is [Nagrota](gp_name)
-      - The GP name is [Alipur](gp_name)
-      - [Tejpur](gp_name)
-
-  # Intent: affirm
   - intent: affirm
     examples: |
-      - Yes
-      - Sure
-      - Absolutely
-      - Of course
-      - Yeah
-      - Correct
-      - That's right
-      - Yep
+      - yes
+      - sure
+      - of course
+      - definitely
+      - yeah
 
-  # Intent: deny
   - intent: deny
     examples: |
-      - No
-      - Nope
-      - Not really
-      - I don't think so
-      - Nah
-      - No, thank you
-      - Negative
+      - no
+      - not now
+      - maybe later
+      - I don't want to
+      - nope
 
-  # Intent: out_of_scope
-  - intent: out_of_scope
-    examples: |
-      - What is the weather today?
-      - Tell me a joke
-      - Who won the match yesterday?
-      - What is your favorite color?
-      - How do I cook pasta?
-      - What time is it?
-
-  # Intent: end_conversation
-  - intent: end_conversation
-    examples: |
-      - That would be all
-      - No, thank you
-      - I am done
-      - Bye
-      - Goodbye
-      - See you later
-      - End this chat
-
-  # Intent: speak_agent
-  - intent: speak_agent
-    examples: |
-      - I want to speak to an agent
-      - Can you connect me to an agent?
-      - I need human assistance
-      - Please connect me with someone
-      - Let me talk to a real person
-
-  # Intent: learn_services
-  - intent: learn_services
-    examples: |
-      - What services do you offer?
-      - Tell me about the available services
-      - What can you help me with?
-      - What are my options here?
-      - Please list the services
-
-# Entities
-# scheme_name: Captures the name of the scheme or certificate the user wants to apply for.
-# contact_type: Identifies the type of emergency contact the user is requesting (e.g., medical, fire, police).
-# person_name: Captures the user's name.
-# contact_number: Captures the user's contact number.
-# gp_name: Captures the name of the user's Gram Panchayat (GP).
-
-# This NLU data ensures that the chatbot understands various ways users might express their needs,
-# covering diverse intents such as greeting, applying for schemes, querying emergency contacts, providing information, and ending the conversation.

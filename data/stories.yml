@@ -6,7 +6,7 @@ stories:
   steps:
     - intent: greet
     - action: utter_greet
-    - action: utter_options
+    - action: utter_service_options  # Offers the user available services
     - intent: apply_scheme  # User chooses to apply for a scheme
     - action: utter_ask_scheme_type
     - intent: select_scheme
@@ -14,34 +14,24 @@ stories:
         - scheme_name: "Pradhan Mantri Awas Yojana"
     - action: apply_scheme_form  # Trigger the form to collect user details
     - active_loop: apply_scheme_form
-    - intent: provide_name
-      entities:
-        - person_name: "John Doe"
-    - intent: provide_contact_number
-      entities:
-        - contact_number: "9876543210"
-    - intent: provide_gp_name
-      entities:
-        - gp_name: "Bhagwanpur"
-    - active_loop: null  # End the form
-    - action: action_confirm_application
-    - action: utter_follow_up_options
-    - intent: affirm  # User chooses to continue
-    - action: utter_options
+    - active_loop: null  # End the form once all details are filled
+    - action: utter_confirmation_for_filled_form
 
-- story: get_emergency_contact_with_form
+- story: get_emergency_contact
   steps:
     - intent: greet
     - action: utter_greet
-    - action: utter_options
-    - intent: query_contact  # User chooses to get emergency contact details
-    - action: emergency_contact_form  # Trigger the form to collect user details
-    - active_loop: emergency_contact_form
-    - intent: select_contact_type
+    - action: utter_service_options  # Offers services available
+    - intent: query_emergency_contact  # User chooses to get emergency contact details
+    - action: utter_list_of_emergency_numbers
+    - intent: emergency_contact_type
       entities:
-        - contact_type: "Medical Assistance"
-    - active_loop: null  # End the form
-    - action: utter_contact_details
-    - action: utter_follow_up_options
-    - intent: deny  # User ends conversation
+        - em_contact_type: "Hospital"
+    - action: utter_contact_details  # Provides emergency contact details
     - action: utter_goodbye
+
+- story: general_greeting_and_info
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - action: utter_service_options  # Offers services to the user

@@ -1,34 +1,10 @@
 version: "3.1"
 
 rules:
-
-- rule: Greet and offer services
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: utter_options
-
-- rule: Apply for a scheme
-  steps:
-  - intent: apply_scheme
-  - action: utter_ask_scheme_type
-
-- rule: Get emergency contact details
-  steps:
-  - intent: query_contact
-  - action: emergency_contact_form
-  - active_loop: emergency_contact_form
-
-- rule: Handle follow-up after form
-  condition:
-  - active_loop: apply_scheme_form
-  steps:
-  - action: apply_scheme_form
-  - active_loop: null
-  - action: action_confirm_application
-  - action: utter_follow_up_options
-
-- rule: User wants to end the conversation
-  steps:
-  - intent: deny
-  - action: utter_goodbye
+  - rule: Apply Scheme Form
+    steps:
+      - intent: apply_scheme
+      - action: utter_ask_scheme_type
+      - intent: select_scheme
+      - action: apply_scheme_form
+      - active_loop: apply_scheme_form
