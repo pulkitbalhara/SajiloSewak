@@ -110,7 +110,7 @@ nlu:
     - How do I alert the administration about a cyclone?
     - Where can I report a disaster situation?
 
-- intent: scheme_name
+- intent: my_scheme_name
   examples: |
     - I want to apply for [Pradhan Mantri Awas Yojana](scheme_name)
     - Apply for [Ayushman Bharat](scheme_name)
@@ -118,14 +118,14 @@ nlu:
     - Tell me more about [Mudra Loan Scheme](scheme_name)
     - I want to enroll in [PM Kisan Yojana](scheme_name)
 
-- intent: phone_number
+- intent: my_phone_number
   examples: |
     - My number is [9876543210](phone_number)
     - You can reach me at [9876543210](phone_number)
     - Contact me at [9876543210](phone_number)
     - My mobile number is [9876543210](phone_number)
     - [9876543210](phone_number) is my contact number
-- intent: GPU_location
+- intent: my_GPU_location
   examples: |
     - I live in [Dhankuta GPU](GPU_location)
     - My location is [Singtam GPU](GPU_location)

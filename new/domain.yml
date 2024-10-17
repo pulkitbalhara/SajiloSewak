@@ -9,6 +9,9 @@ intents:
   - report_grievance
   - report_disaster
   - scheme_know
+  - my_scheme_name
+  - my_phone_number
+  - my_GPU_location
 
 slots:
   scheme_name:
