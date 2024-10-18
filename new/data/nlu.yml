@@ -61,6 +61,23 @@ nlu:
     - What documents do I need to apply for [Startup India](scheme)?
     - Can you guide me through the application process for [Digital India](scheme)?
     - How can I enroll in [Swachh Bharat Mission](scheme)?
+
+- intent: choose_scheme
+  examples: |
+    - [Pradhan Mantri Awas Yojana](scheme_name)
+    - [Ayushman Bharat](scheme_name)
+    - [PM Kisan Yojana](scheme_name)
+    - [Startup India](scheme_name)
+    - [Mudra Loan Scheme](scheme_name)
+    - I want to apply for [Pradhan Mantri Awas Yojana](scheme_name)
+    - Help me apply for [Pradhan Mantri Awas Yojana](scheme_name)
+    - Please enroll me in [Pradhan Mantri Awas Yojana](scheme_name)
+    - Apply for [Pradhan Mantri Awas Yojana](scheme_name)
+    - Register me for [Pradhan Mantri Awas Yojana](scheme_name)
+    - I would like to enroll in [Pradhan Mantri Awas Yojana](scheme_name)
+    - [Pradhan Mantri Awas Yojana](scheme_name) sounds good for me
+    - I'd like to apply for [Pradhan Mantri Awas Yojana](scheme_name)
+
 - intent: certificate_apply
   examples: |
     - I want to apply for a certificate
@@ -109,26 +126,3 @@ nlu:
     - I need to report a disaster in my area
     - How do I alert the administration about a cyclone?
     - Where can I report a disaster situation?
-
-- intent: my_scheme_name
-  examples: |
-    - I want to apply for [Pradhan Mantri Awas Yojana](scheme_name)
-    - Apply for [Ayushman Bharat](scheme_name)
-    - I'm interested in [Startup India](scheme_name)
-    - Tell me more about [Mudra Loan Scheme](scheme_name)
-    - I want to enroll in [PM Kisan Yojana](scheme_name)
-
-- intent: my_phone_number
-  examples: |
-    - My number is [9876543210](phone_number)
-    - You can reach me at [9876543210](phone_number)
-    - Contact me at [9876543210](phone_number)
-    - My mobile number is [9876543210](phone_number)
-    - [9876543210](phone_number) is my contact number
-- intent: my_GPU_location
-  examples: |
-    - I live in [Dhankuta GPU](GPU_location)
-    - My location is [Singtam GPU](GPU_location)
-    - I'm from [Namchi GPU](GPU_location)
-    - The GPU is [Gangtok GPU](GPU_location)
-    - I'm staying in [Ravangla GPU](GPU_location)

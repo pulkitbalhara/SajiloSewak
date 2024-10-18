@@ -1,18 +1,21 @@
 version: "3.1"
-
 rules:
 
-- rule: Say goodbye anytime the user says goodbye
-  steps:
-  - intent: goodbye
-  - action: utter_goodbye
 
-- rule: Submit the scheme apply form
-  condition:
-    - active_loop: scheme_apply_form
-  steps:
-    - action: scheme_apply_form
-    - active_loop: null
-    - slot_was_set:
-        - requested_slot: null
-    - action: action_submit_scheme_form
+  - rule: Filling the scheme_apply_form
+    condition:
+      - active_loop: scheme_apply_form  # Form is active
+    steps:
+      - action: scheme_apply_form
+      - active_loop: scheme_apply_form
+
+  - rule: Submit the form
+    condition:
+      - active_loop: scheme_apply_form  # Ensure the form is active and slots are filled
+    steps:
+      - slot_was_set:
+          - phone_number  # Once phone number is filled
+      - slot_was_set:
+          - GPU_location  # Once GPU location is filled
+      - action: action_submit_scheme_form  # Submit the form
+      - active_loop: null  # Deactivate the form
