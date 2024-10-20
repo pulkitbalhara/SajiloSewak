@@ -80,11 +80,14 @@ forms:
     required_slots:
       - phone_number
       - GPU_location
+    slot_mappings:
+      phone_number:
+        - type: from_text  # Ensure this comes directly from user text
+      GPU_location:
+        - type: from_text  # Same for the GPU locatio
 
 entities:
   - scheme_name
-  - phone_number
-  - GPU_location
 
 actions:
   - action_submit_scheme_form
