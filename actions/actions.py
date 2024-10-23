@@ -12,29 +12,35 @@ class ActionFetchSchemeDetails(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        # Get the selected scheme ID from the slot
-        scheme_id = tracker.get_slot("bullet_id")
+        # Get the selected bullet ID from slot
+        scheme_id = tracker.get_slot("bullet_selected")
 
         # Connect to SQLite database
         connection = sqlite3.connect('data/data.sqlite')
         cursor = connection.cursor()
 
-        # Query the database for scheme details based on scheme_id
-        cursor.execute("SELECT scheme_name, details FROM Schemes WHERE scheme_id=?", (scheme_id,))
-        result = cursor.fetchone()
+        # Query the "Know a Scheme" table for scheme details based on scheme_id
+        table_name = "Know a Scheme"
+        try:
+            query = f"SELECT Scheme_name, Scheme_details FROM [{table_name}] WHERE Scheme_id=?"
+            cursor.execute(query, (scheme_id,))
+            result = cursor.fetchone()
 
-        # If a result is found, display it
-        if result:
-            scheme_name, details = result
-            response = f"Here are the details of the scheme:\n{scheme_name}: {details}"
-        else:
-            response = "Sorry, I couldn't find details for that scheme."
+            # If a result is found, display it
+            if result:
+                scheme_name, details = result
+                response = f"Here are the details of the scheme:\n{scheme_name}: {details}"
+            else:
+                response = "Sorry, I couldn't find details for that scheme."
+
+            # Send the response back to the user
+            dispatcher.utter_message(text=response)
+
+        except sqlite3.Error as e:
+            dispatcher.utter_message(text=f"An error occurred: {e}")
 
         # Close the database connection
         connection.close()
-
-        # Send the response back to the user
-        dispatcher.utter_message(text=response)
 
         return []
 
@@ -48,26 +54,41 @@ class ActionSubmitApplication(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         # Get the necessary information from slots
-        scheme_id = tracker.get_slot("bullet_id")
-        name = tracker.get_slot("name")
-        phone_number = tracker.get_slot("phone_number")
+        scheme_id = tracker.get_slot("bullet_selected")
+        scheme_name = None
+        user_name = tracker.get_slot("name")
+        user_pn = tracker.get_slot("phone_number")
+        user_gpu = tracker.get_slot("GPU_location")
 
         # Connect to SQLite database
         connection = sqlite3.connect('data/data.sqlite')
         cursor = connection.cursor()
 
-        # Insert user application into the database
-        cursor.execute("INSERT INTO User_Applications (scheme_selected, name, phone_number) VALUES (?, ?, ?)",
-                       (scheme_id, name, phone_number))
+        # Retrieve the scheme name based on scheme_id from "Know a Scheme"
+        try:
+            cursor.execute("SELECT Scheme_name FROM [Know a Scheme] WHERE Scheme_id=?", (scheme_id,))
+            scheme = cursor.fetchone()
+            if scheme:
+                scheme_name = scheme[0]
+            else:
+                dispatcher.utter_message(text="Sorry, I couldn't find the scheme you are trying to apply for.")
+                connection.close()
+                return []
 
-        # Commit the transaction and close the connection
-        connection.commit()
+            # Insert user application into "Apply a Scheme" table
+            table_name = "Apply a Scheme"
+            cursor.execute(f"INSERT INTO [{table_name}] (Scheme_id, Scheme_name, user_name, user_pn, user_gpu) VALUES (?, ?, ?, ?, ?)",
+                           (scheme_id, scheme_name, user_name, user_pn, user_gpu))
+
+            # Commit the transaction and close the connection
+            connection.commit()
+            response = f"Your application for scheme '{scheme_name}' has been successfully submitted. We will contact you at {user_pn} shortly."
+            dispatcher.utter_message(text=response)
+
+        except sqlite3.Error as e:
+            dispatcher.utter_message(text=f"An error occurred while submitting your application: {e}")
+
+        # Close the database connection
         connection.close()
-
-        # Confirmation message
-        dispatcher.utter_message(
-            text=f"Your application for scheme {scheme_id} has been successfully submitted. "
-                 f"We will contact you at {phone_number} shortly."
-        )
 
         return []

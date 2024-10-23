@@ -1,5 +1,4 @@
 version: "3.1"
-
 stories:
   - story: User wants to know about a scheme
     steps:
@@ -10,7 +9,7 @@ stories:
       - slot_was_set:
           - MainOption_selected: "1"
       - action: utter_list_schemes
-      - intent: select_option
+      - intent: inform
       - slot_was_set:
           - bullet_selected: "1"
       - action: action_fetch_scheme_details
@@ -24,7 +23,7 @@ stories:
       - slot_was_set:
           - MainOption_selected: "2"
       - action: utter_list_schemes
-      - intent: select_option
+      - intent: inform
       - slot_was_set:
           - bullet_selected: "1"
       - action: utter_ask_name
@@ -35,5 +34,9 @@ stories:
       - intent: inform
       - slot_was_set:
           - phone_number: "9306650316"
+      - action: utter_ask_gpu_location
+      - intent: inform
+      - slot_was_set:
+          - GPU_location: "Samdong GPU"
       - action: action_submit_application
       - action: utter_application_confirm

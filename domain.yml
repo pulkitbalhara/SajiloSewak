@@ -11,6 +11,7 @@ entities:
   - bullet_id
   - name
   - phone_number
+  - GPU_location
 
 slots:
   MainOption_selected:
@@ -24,7 +25,7 @@ slots:
         intent: apply_scheme
         value: "2"
 
-  bullet_id:
+  bullet_selected:
     type: text
     influence_conversation: false
     mappings:
@@ -44,6 +45,13 @@ slots:
     mappings:
       - type: from_entity
         entity: phone_number
+  
+  GPU_location:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: GPU_location
 
 responses:
   utter_greet:
@@ -58,21 +66,27 @@ responses:
           payload: '/apply_scheme'
 
   utter_list_schemes:
-    - text: |
-        Here are the schemes you can know about:
-        1. Pradhan Mantri Awas Yojana
-        2. Ayushman Bharat
-        3. PM Kisan Yojana
-        4. Startup India
-        5. Mudra Loan Scheme
-
-        Please type the number of the scheme you'd like to know more about.
+    - text: "Here are the schemes you can know about. Please select one:"
+      buttons:
+        - title: "1. Pradhan Mantri Awas Yojana"
+          payload: '/select_option{"bullet_id": "1"}'
+        - title: "2. Ayushman Bharat"
+          payload: '/select_option{"bullet_id": "2"}'
+        - title: "3. PM Kisan Yojana"
+          payload: '/select_option{"bullet_id": "3"}'
+        - title: "4. Startup India"
+          payload: '/select_option{"bullet_id": "4"}'
+        - title: "5. Mudra Loan Scheme"
+          payload: '/select_option{"bullet_id": "5"}'
 
   utter_ask_name:
     - text: "Please provide your name."
 
   utter_ask_phone_number:
     - text: "Please provide your phone number."
+
+  utter_ask_gpu_location:
+    - text: "Please provide your GPU location. (e.g., Geyzing, Rimbi, Yukson, Samdong GPU)"
 
   utter_application_confirm:
     - text: "Your application for the {scheme_name} has been successfully submitted. We will contact you at {phone_number} soon."
@@ -82,14 +96,7 @@ responses:
         Here are the details of the scheme:
         {scheme_name}: {details}
 
-forms:
-  apply_scheme_form:
-    required_slots:
-      - scheme_name
-  emergency_contact_form:
-    required_slots:
-      - em_contact_type
 
-actions:
+actions: 
   - action_fetch_scheme_details
   - action_submit_application

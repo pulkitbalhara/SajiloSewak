@@ -1,8 +1,17 @@
 version: "3.1"
 
+
 rules:
-  - rule: Greet and offer options
+  - rule: User wants to know about a scheme
     steps:
-      - intent: greet
-      - action: utter_greet
-      - action: utter_options
+      - intent: know_scheme
+      - slot_was_set:
+          - MainOption_selected: "1"
+      - action: utter_list_schemes
+
+  - rule: User wants to apply for a scheme
+    steps:
+      - intent: apply_scheme
+      - slot_was_set:
+          - MainOption_selected: "2"
+      - action: utter_list_schemes

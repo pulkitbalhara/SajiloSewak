@@ -11,6 +11,10 @@ nlu:
       - hey there
       - hi there
 
+  - intent: select_option
+    examples: |
+      - I want to select this option
+
   - intent: know_scheme
     examples: |
       - I want to know about schemes
@@ -31,18 +35,6 @@ nlu:
       - I want to apply to a scheme
       - Can I apply for a scheme?
 
-  - intent: select_option
-    examples: |
-      - [1](bullet_id)
-      - [2](bullet_id)
-      - [3](bullet_id)
-      - [4](bullet_id)
-      - [5](bullet_id)
-      - I choose [1](bullet_id)
-      - My choice is [2](bullet_id)
-      - I select [3](bullet_id)
-      - Let's go with [4](bullet_id)
-      - I pick [5](bullet_id)
 
   - intent: inform
     examples: |
@@ -58,3 +50,22 @@ nlu:
       - You can reach me at [9123456789](phone_number)
       - My number is [9876543210](phone_number)
       - [9876543210](phone_number)
+      - My name is [John](name)
+      - I am [John](name)
+      - You can call me [Alex](name)
+      - I am [Alex](name)
+      - [Jane](name)
+      - [John](name)
+      - My phone number is [9876543210](phone_number)
+      - It's [9876543210](phone_number)
+      - You can reach me at [9123456789](phone_number)
+      - My number is [9876543210](phone_number)
+      - [9876543210](phone_number)
+      - My GPU location is [Geyzing](GPU_location)
+      - I am from [Rimbi](GPU_location)
+      - My location is [Yukson](GPU_location)
+      - The GPU is [Samdong GPU](GPU_location)
+      - I am applying from [Geyzing](GPU_location)
+      - You can find me at [Rimbi](GPU_location)
+      - My GPU is [Yukson](GPU_location)
+      - [Samdong GPU](GPU_location)
