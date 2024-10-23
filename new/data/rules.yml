@@ -2,13 +2,6 @@ version: "3.1"
 rules:
 
 
-  - rule: Filling the scheme_apply_form
-    condition:
-      - active_loop: scheme_apply_form  # Form is active
-    steps:
-      - action: scheme_apply_form
-      - active_loop: scheme_apply_form
-
   - rule: Submit the form
     condition:
       - active_loop: scheme_apply_form  # Ensure the form is active and slots are filled

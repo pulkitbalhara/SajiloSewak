@@ -1,55 +1,86 @@
 version: "3.1"
 
 intents:
-  - apply_scheme
-  - select_scheme
   - greet
-  - query_emergency_contact
-  - emergency_contact_type
-  - affirm
-  - deny
+  - know_scheme
+  - apply_scheme
+  - select_option
+  - inform
 
 entities:
-  - scheme_name
-  - em_contact_type
+  - bullet_id
+  - name
+  - phone_number
 
 slots:
-  scheme_name:
+  MainOption_selected:
     type: text
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        intent: know_scheme
+        value: "1"
+      - type: from_intent
+        intent: apply_scheme
+        value: "2"
+
+  bullet_id:
+    type: text
+    influence_conversation: false
     mappings:
       - type: from_entity
-        entity: scheme_name
-  em_contact_type:
+        entity: bullet_id
+
+  name:
     type: text
+    influence_conversation: false
     mappings:
       - type: from_entity
-        entity: em_contact_type
+        entity: name
+
+  phone_number:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: phone_number
 
 responses:
   utter_greet:
     - text: "Hello! How can I assist you today?"
-  utter_service_options:
-    - text: "Here are some options I can help you with:"
+
+  utter_options:
+    - text: "You can either apply for a scheme or know more about government schemes. What would you like to do?"
       buttons:
+        - title: "Know about a Scheme"
+          payload: '/know_scheme'
         - title: "Apply for a Scheme"
-          payload: /apply_scheme
-        - title: "Get Emergency Contact"
-          payload: /query_emergency_contact
-  utter_ask_scheme_type:
-    - text: "Which scheme would you like to apply for?"
-      buttons:
-        - title: "PM Awas Yojana"
-          payload: /select_scheme{"scheme_name": "PM Awas Yojana"}
-        - title: "Certificate Issuance"
-          payload: /select_scheme{"scheme_name": "Certificate Issuance"}
-  utter_confirmation_for_filled_form:
-    - text: "Thank you for providing the details. Your application has been submitted."
-  utter_list_of_emergency_numbers:
-    - text: "I can provide emergency contact details for hospitals, police, and fire services. Which one do you need?"
-  utter_contact_details:
-    - text: "Here are the contact details you requested."
-  utter_goodbye:
-    - text: "Thank you! Have a great day!"
+          payload: '/apply_scheme'
+
+  utter_list_schemes:
+    - text: |
+        Here are the schemes you can know about:
+        1. Pradhan Mantri Awas Yojana
+        2. Ayushman Bharat
+        3. PM Kisan Yojana
+        4. Startup India
+        5. Mudra Loan Scheme
+
+        Please type the number of the scheme you'd like to know more about.
+
+  utter_ask_name:
+    - text: "Please provide your name."
+
+  utter_ask_phone_number:
+    - text: "Please provide your phone number."
+
+  utter_application_confirm:
+    - text: "Your application for the {scheme_name} has been successfully submitted. We will contact you at {phone_number} soon."
+
+  utter_scheme_details:
+    - text: |
+        Here are the details of the scheme:
+        {scheme_name}: {details}
 
 forms:
   apply_scheme_form:
@@ -60,4 +91,5 @@ forms:
       - em_contact_type
 
 actions:
-  - action_confirm_application
+  - action_fetch_scheme_details
+  - action_submit_application

@@ -3,55 +3,58 @@ version: "3.1"
 nlu:
   - intent: greet
     examples: |
-      - hello
       - hi
+      - hello
       - hey
       - good morning
       - good evening
       - hey there
+      - hi there
+
+  - intent: know_scheme
+    examples: |
+      - I want to know about schemes
+      - Tell me about the schemes
+      - Can you list the schemes
+      - Show me the available schemes
+      - I want to know more about the schemes
+      - What schemes are available?
+      - List the schemes for me
 
   - intent: apply_scheme
     examples: |
       - I want to apply for a scheme
-      - I want to apply for Pradhan Mantri Awas Yojana
-      - Can I apply for a government scheme?
       - Apply for a scheme
-      - How can I apply for the housing scheme?
+      - How do I apply for a scheme?
+      - Help me apply for a scheme
+      - I would like to apply for a scheme
+      - I want to apply to a scheme
+      - Can I apply for a scheme?
 
-  - intent: select_scheme
+  - intent: select_option
     examples: |
-      - I want to apply for [Pradhan Mantri Awas Yojana](scheme_name)
-      - Apply for [Pradhan Mantri Awas Yojana](scheme_name)
-      - [Pradhan Mantri Awas Yojana](scheme_name)
-      - I choose [Pradhan Mantri Awas Yojana](scheme_name)
+      - [1](bullet_id)
+      - [2](bullet_id)
+      - [3](bullet_id)
+      - [4](bullet_id)
+      - [5](bullet_id)
+      - I choose [1](bullet_id)
+      - My choice is [2](bullet_id)
+      - I select [3](bullet_id)
+      - Let's go with [4](bullet_id)
+      - I pick [5](bullet_id)
 
-  - intent: query_emergency_contact
+  - intent: inform
     examples: |
-      - I need emergency contact details
-      - Can you give me emergency contact numbers?
-      - I need contact information for emergencies
-      - Please provide emergency contacts
-
-  - intent: emergency_contact_type
-    examples: |
-      - I need contact for [Hospital](em_contact_type)
-      - Give me the [Hospital](em_contact_type) number
-      - Contact for [Hospital](em_contact_type)
-      - I need [Hospital](em_contact_type) contact details
-
-  - intent: affirm
-    examples: |
-      - yes
-      - sure
-      - of course
-      - definitely
-      - yeah
-
-  - intent: deny
-    examples: |
-      - no
-      - not now
-      - maybe later
-      - I don't want to
-      - nope
-
+      - My name is [John](name)
+      - I am [John](name)
+      - My name is [Jane](name)
+      - You can call me [Alex](name)
+      - I am [Alex](name)
+      - [John](name)
+      - [Jane](name)
+      - My phone number is [9876543210](phone_number)
+      - It's [9876543210](phone_number)
+      - You can reach me at [9123456789](phone_number)
+      - My number is [9876543210](phone_number)
+      - [9876543210](phone_number)

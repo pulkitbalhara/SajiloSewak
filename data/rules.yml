@@ -1,10 +1,8 @@
 version: "3.1"
 
 rules:
-  - rule: Apply Scheme Form
+  - rule: Greet and offer options
     steps:
-      - intent: apply_scheme
-      - action: utter_ask_scheme_type
-      - intent: select_scheme
-      - action: apply_scheme_form
-      - active_loop: apply_scheme_form
+      - intent: greet
+      - action: utter_greet
+      - action: utter_options
