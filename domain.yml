@@ -69,15 +69,15 @@ responses:
     - text: "Here are the schemes you can know about. Please select one:"
       buttons:
         - title: "1. Pradhan Mantri Awas Yojana"
-          payload: '/select_option{"bullet_id": "1"}'
+          payload: '/select_option{"bullet_selected": "1"}'
         - title: "2. Ayushman Bharat"
-          payload: '/select_option{"bullet_id": "2"}'
+          payload: '/select_option{"bullet_selected": "2"}'
         - title: "3. PM Kisan Yojana"
-          payload: '/select_option{"bullet_id": "3"}'
+          payload: '/select_option{"bullet_selected": "3"}'
         - title: "4. Startup India"
-          payload: '/select_option{"bullet_id": "4"}'
+          payload: '/select_option{"bullet_selected": "4"}'
         - title: "5. Mudra Loan Scheme"
-          payload: '/select_option{"bullet_id": "5"}'
+          payload: '/select_option{"bullet_selected": "5"}'
 
   utter_ask_name:
     - text: "Please provide your name."
