@@ -1,6 +1,0 @@
-{
-  "rule_only_slots": [],
-  "rule_only_loops": [
-    "scheme_apply_form"
-  ]
-}

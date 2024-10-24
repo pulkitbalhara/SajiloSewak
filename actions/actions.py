@@ -109,7 +109,7 @@ class ActionGiveEmergencyContact(Action):
 
         try:
             # Query to fetch contact details based on bullet_id
-            cursor.execute("SELECT department_name, contact_details FROM contactdetails WHERE department_id = ?", (bullet_id,))
+            cursor.execute("SELECT department_name, contact_details FROM [contactdetails] WHERE department_id = ?", (bullet_id,))
             result = cursor.fetchone()
 
             if result:
@@ -145,7 +145,7 @@ class ActionSubmitDisasterForm(Action):
         try:
             # Insert the values into the disaster table
             cursor.execute('''
-                INSERT INTO disaster (disaster_type, disaster_location, contact_number)
+                INSERT INTO [disaster] (disaster_type, disaster_location, contact_number)
                 VALUES (?, ?, ?)
             ''', (disaster_type, disaster_location, contact_number))
 

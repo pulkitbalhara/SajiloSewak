@@ -54,7 +54,7 @@ stories:
       - slot_was_set:
           - bullet_selected: "1"
       - action: action_give_emergency_contact
-      - action: action_listen
+      - action: utter_more_options
 
 
 
