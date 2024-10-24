@@ -92,3 +92,69 @@ class ActionSubmitApplication(Action):
         connection.close()
 
         return []
+    
+class ActionGiveEmergencyContact(Action):
+    def name(self) -> Text:
+        return "action_give_emergency_contact"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # Connect to SQLite database
+        connection = sqlite3.connect('data.sqlite')
+        cursor = connection.cursor()
+
+        # Get the value of bullet_id from the slot
+        bullet_id = tracker.get_slot("bullet_id")
+
+        try:
+            # Query to fetch contact details based on bullet_id
+            cursor.execute("SELECT department_name, contact_details FROM contactdetails WHERE department_id = ?", (bullet_id,))
+            result = cursor.fetchone()
+
+            if result:
+                department_name = result[0]
+                contact_details = result[1]
+                dispatcher.utter_message(text=f"Your request for {department_name} - Here are the contact details: {contact_details}")
+            else:
+                dispatcher.utter_message(text="Sorry, I couldn't find the contact information for the selected department.")
+        except sqlite3.Error as e:
+            dispatcher.utter_message(text=f"An error occurred while fetching contact details: {e}")
+        finally:
+            # Close the database connection
+            connection.close()
+
+        return []
+    
+class ActionSubmitDisasterForm(Action):
+    def name(self) -> Text:
+        return "action_submit_disaster_form"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        # Connect to SQLite database
+        connection = sqlite3.connect('data.sqlite')
+        cursor = connection.cursor()
+
+        # Get the values of the slots
+        disaster_type = tracker.get_slot("disaster_type")
+        disaster_location = tracker.get_slot("disaster_location")
+        contact_number = tracker.get_slot("phone_number")
+
+        try:
+            # Insert the values into the disaster table
+            cursor.execute('''
+                INSERT INTO disaster (disaster_type, disaster_location, contact_number)
+                VALUES (?, ?, ?)
+            ''', (disaster_type, disaster_location, contact_number))
+
+            connection.commit()
+            dispatcher.utter_message(text=f"Thank you for reporting the {disaster_type} at {disaster_location}. We will contact you at {contact_number} for further assistance.")
+        except sqlite3.Error as e:
+            dispatcher.utter_message(text=f"An error occurred while saving the disaster report: {e}")
+        finally:
+            # Close the database connection
+            connection.close()
+
+        return []

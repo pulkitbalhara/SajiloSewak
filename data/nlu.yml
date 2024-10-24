@@ -1,71 +1,116 @@
 version: "3.1"
-
 nlu:
-  - intent: greet
-    examples: |
-      - hi
-      - hello
-      - hey
-      - good morning
-      - good evening
-      - hey there
-      - hi there
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+    - good morning
+    - good evening
+    - hey there
+    - hi there
+- intent: select_option
+  examples: |
+    - {"bullet_id": "1"}
+    - {"bullet_id": "2"}
+    - {"bullet_id": "3"}
+    - {"bullet_id": "4"}
+    - {"bullet_id": "5"}
+    - I choose [1](bullet_id)
+    - Let's go with [2](bullet_id)
+    - Please tell me more about [3](bullet_id)
+    - Show me information on [4](bullet_id)
+    - I want to know about [5](bullet_id)
+    - Scheme number [1](bullet_id)
+    - Option [2](bullet_id)
+    - I would like option [3](bullet_id)
+    - Scheme [4](bullet_id)
+    - Select [5](bullet_id)
+- intent: know_scheme
+  examples: |
+    - I want to know about schemes
+    - Tell me about the schemes
+    - Can you list the schemes
+    - Show me the available schemes
+    - I want to know more about the schemes
+    - What schemes are available?
+    - List the schemes for me
+- intent: apply_scheme
+  examples: |
+    - I want to apply for a scheme
+    - Apply for a scheme
+    - How do I apply for a scheme?
+    - Help me apply for a scheme
+    - I would like to apply for a scheme
+    - I want to apply to a scheme
+    - Can I apply for a scheme?
+- intent: inform
+  examples: |
+    - My name is [John](name)
+    - I am [John](name)
+    - My name is [Jane](name)
+    - You can call me [Alex](name)
+    - I am [Alex](name)
+    - [John](name)
+    - [Jane](name)
+    - My phone number is [9876543210](phone_number)
+    - It's [9876543210](phone_number)
+    - You can reach me at [9123456789](phone_number)
+    - My number is [9876543210](phone_number)
+    - [9876543210](phone_number)
+    - My GPU location is [Geyzing](GPU_location)
+    - I am from [Rimbi](GPU_location)
+    - My location is [Yukson](GPU_location)
+    - The GPU is [Samdong GPU](GPU_location)
+    - I am applying from [Geyzing](GPU_location)
+    - You can find me at [Rimbi](GPU_location)
+    - My GPU is [Yukson](GPU_location)
+    - [Samdong GPU](GPU_location)
+    - [John](name)
+    - [9306650316](phone_number)
+    - [Geyzing GPU](GPU_location)
+    - The disaster is [Landslide](disaster_type)
+    - It's a [Tree Felling](disaster_type)
+    - There has been an [Animal Bite](disaster_type)
+    - My phone number is [9876543210](phone_number)
+    - Please contact me at [9306650316](phone_number)
+    - The location is [Geyzing](GPU_location)
+    - The incident happened at [Rimbi](GPU_location)
+    - Please note my contact number as [8765432109](phone_number)
+    - The exact location is [Samdong GPU](GPU_location)
+    - I want to report [Landslide](disaster_type)
+    - Disaster location is [Rimbi](GPU_location)
+    - My phone number for this report is [9988776655](phone_number)
+    - Disaster occurred in [Samdong GPU](GPU_location)
+    - I was at [Yuksom](GPU_location) when it happened
+    - You can reach me at [9845612307](phone_number)
+    - Incident type: [Tree Felling](disaster_type)
+    - Contact me at [9998887777](phone_number)
+    - It was an [Animal Bite](disaster_type)
 
-  - intent: select_option
-    examples: |
-      - I want to select this option
 
-  - intent: know_scheme
-    examples: |
-      - I want to know about schemes
-      - Tell me about the schemes
-      - Can you list the schemes
-      - Show me the available schemes
-      - I want to know more about the schemes
-      - What schemes are available?
-      - List the schemes for me
+- intent: apply_certificate
+  examples: |
+    - I want to apply for a certificate
+    - How can I get a certificate?
+    - Help me apply for a certificate
+    - Apply for a certificate
+    - I need a certificate
+    - Certificate application
 
-  - intent: apply_scheme
-    examples: |
-      - I want to apply for a scheme
-      - Apply for a scheme
-      - How do I apply for a scheme?
-      - Help me apply for a scheme
-      - I would like to apply for a scheme
-      - I want to apply to a scheme
-      - Can I apply for a scheme?
+- intent: report_disaster
+  examples: |
+    - I need to report a disaster
+    - Report a disaster
+    - There is a disaster
+    - Something happened, I need to report a disaster
+    - How can I report a disaster?
+    - I want to report a natural calamity
+
+- intent: emergency_contact
+  examples: |
+    - I want to get contact details of 
+    - Please quickly tell me details of emergency police
+    - tell me details of fire police, health
 
 
-  - intent: inform
-    examples: |
-      - My name is [John](name)
-      - I am [John](name)
-      - My name is [Jane](name)
-      - You can call me [Alex](name)
-      - I am [Alex](name)
-      - [John](name)
-      - [Jane](name)
-      - My phone number is [9876543210](phone_number)
-      - It's [9876543210](phone_number)
-      - You can reach me at [9123456789](phone_number)
-      - My number is [9876543210](phone_number)
-      - [9876543210](phone_number)
-      - My name is [John](name)
-      - I am [John](name)
-      - You can call me [Alex](name)
-      - I am [Alex](name)
-      - [Jane](name)
-      - [John](name)
-      - My phone number is [9876543210](phone_number)
-      - It's [9876543210](phone_number)
-      - You can reach me at [9123456789](phone_number)
-      - My number is [9876543210](phone_number)
-      - [9876543210](phone_number)
-      - My GPU location is [Geyzing](GPU_location)
-      - I am from [Rimbi](GPU_location)
-      - My location is [Yukson](GPU_location)
-      - The GPU is [Samdong GPU](GPU_location)
-      - I am applying from [Geyzing](GPU_location)
-      - You can find me at [Rimbi](GPU_location)
-      - My GPU is [Yukson](GPU_location)
-      - [Samdong GPU](GPU_location)

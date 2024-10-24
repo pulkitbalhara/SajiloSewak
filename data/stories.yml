@@ -8,8 +8,8 @@ stories:
       - intent: know_scheme
       - slot_was_set:
           - MainOption_selected: "1"
-      - action: utter_list_schemes
-      - intent: inform
+      - action: utter_list_schemes_know
+      - intent: select_option
       - slot_was_set:
           - bullet_selected: "1"
       - action: action_fetch_scheme_details
@@ -22,21 +22,44 @@ stories:
       - intent: apply_scheme
       - slot_was_set:
           - MainOption_selected: "2"
-      - action: utter_list_schemes
-      - intent: inform
+      - action: utter_list_schemes_apply
+      - intent: select_option
       - slot_was_set:
           - bullet_selected: "1"
-      - action: utter_ask_name
-      - intent: inform
+      - action: scheme_apply_form
+      - active_loop: scheme_apply_form
+
+  - story: User applies for a certificate
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_options
+      - intent: apply_certificate
       - slot_was_set:
-          - name: "Pulkit"
-      - action: utter_ask_phone_number
-      - intent: inform
+          - MainOption_selected: "3"
+      - action: utter_apply_certificate_info
+      - action: utter_more_options
+      - action: utter_options
+
+  - story: User requests emergency contact and selects a department
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - action: utter_options
+      - intent: emergency_contact
       - slot_was_set:
-          - phone_number: "9306650316"
-      - action: utter_ask_gpu_location
-      - intent: inform
+          - MainOption_selected: "5"
+      - action: utter_get_emergency_contact
+      - intent: select_option
       - slot_was_set:
-          - GPU_location: "Samdong GPU"
-      - action: action_submit_application
-      - action: utter_application_confirm
+          - bullet_selected: "1"
+      - action: action_give_emergency_contact
+      - action: action_listen
+
+
+
+
+
+
+  
+      

@@ -1,17 +1,30 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - greet
-  - know_scheme
-  - apply_scheme
-  - select_option
-  - inform
-
+- apply_scheme
+- greet
+- inform
+- know_scheme
+- select_option
+- report_disaster
+- emergency_contact
+- apply_certificate
 entities:
-  - bullet_id
-  - name
-  - phone_number
-  - GPU_location
+- bullet_id
+- name
+- phone_number
+- GPU_location
+- disaster_type
+forms:
+  scheme_apply_form:
+    required_slots:
+      - name
+      - phone_number
+      - GPU_location
+  report_disaster_form:
+    required_slots:
+      - disaster_type
+      - disaster_location
+      - phone_number
 
 slots:
   MainOption_selected:
@@ -20,83 +33,181 @@ slots:
     mappings:
       - type: from_intent
         intent: know_scheme
-        value: "1"
+        value: '1'
       - type: from_intent
         intent: apply_scheme
-        value: "2"
-
+        value: '2'
+      - type: from_intent
+        intent: apply_certificate
+        value: '3'
+      - type: from_intent
+        intent: report_disaster
+        value: '4'
+      - type: from_intent
+        intent: emergency_contact
+        value: '5'
   bullet_selected:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_entity
-        entity: bullet_id
-
+    - type: from_entity
+      entity: bullet_id
   name:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_entity
-        entity: name
-
+    - type: from_entity
+      entity: name
+      conditions:
+          - active_loop: scheme_apply_form
   phone_number:
     type: text
     influence_conversation: false
     mappings:
-      - type: from_entity
-        entity: phone_number
-  
+    - type: from_entity
+      entity: phone_number
+      conditions:
+          - active_loop: scheme_apply_form
+    - type: from_entity
+      entity: phone_number
+      conditions:
+          - active_loop: report_disaster_form
   GPU_location:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: GPU_location
+      conditions:
+          - active_loop: scheme_apply_form
+  disaster_type:
+    type: categorical
+    values:
+      - Landslide
+      - Tree Felling
+      - Animal Bite
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: disaster_type
+        conditions:
+          - active_loop: report_disaster_form
+  disaster_location:
     type: text
     influence_conversation: false
     mappings:
       - type: from_entity
         entity: GPU_location
-
+        conditions:
+          - active_loop: report_disaster_form
 responses:
   utter_greet:
-    - text: "Hello! How can I assist you today?"
-
+  - text: Hello! How can I assist you today?
+  utter_more_options:
+  - text: Done- The main menu is loading for you. 
   utter_options:
-    - text: "You can either apply for a scheme or know more about government schemes. What would you like to do?"
-      buttons:
-        - title: "Know about a Scheme"
-          payload: '/know_scheme'
-        - title: "Apply for a Scheme"
-          payload: '/apply_scheme'
-
-  utter_list_schemes:
-    - text: "Here are the schemes you can know about. Please select one:"
-      buttons:
-        - title: "1. Pradhan Mantri Awas Yojana"
-          payload: '/select_option{"bullet_selected": "1"}'
-        - title: "2. Ayushman Bharat"
-          payload: '/select_option{"bullet_selected": "2"}'
-        - title: "3. PM Kisan Yojana"
-          payload: '/select_option{"bullet_selected": "3"}'
-        - title: "4. Startup India"
-          payload: '/select_option{"bullet_selected": "4"}'
-        - title: "5. Mudra Loan Scheme"
-          payload: '/select_option{"bullet_selected": "5"}'
-
+  - text: You can proceed with any of the above options. 
+    buttons:
+    - title: Know about a Scheme
+      payload: /know_scheme
+    - title: Apply for a Scheme
+      payload: /apply_scheme
+    - title: Apply for a Certificate
+      payload: /apply_certificate
+    - title: Report a Disaster    
+      payload: /report_disaster
+    - title: Get Emergency Contact
+      payload: /emergency_contact
+  
+  utter_list_schemes_know:
+  - text: 'Here are the schemes you can know about. Please select one:'
+    buttons:
+    - title: 1. Pradhan Mantri Awas Yojana
+      payload: '/select_option{"bullet_id": "1"}'
+    - title: 2. Ayushman Bharat
+      payload: '/select_option{"bullet_id": "2"}'
+    - title: 3. PM Kisan Yojana
+      payload: '/select_option{"bullet_id": "3"}'
+    - title: 4. Startup India
+      payload: '/select_option{"bullet_id": "4"}'
+    - title: 5. Mudra Loan Scheme
+      payload: '/select_option{"bullet_id": "5"}'
+  utter_list_schemes_apply:
+  - text: 'Here are the schemes you can know about. Please select one:'
+    buttons:
+    - title: 1. Pradhan Mantri Awas Yojana
+      payload: '/select_option{"bullet_id": "1"}'
+    - title: 2. Ayushman Bharat
+      payload: '/select_option{"bullet_id": "2"}'
+    - title: 3. PM Kisan Yojana
+      payload: '/select_option{"bullet_id": "3"}'
+    - title: 4. Startup India
+      payload: '/select_option{"bullet_id": "4"}'
+    - title: 5. Mudra Loan Scheme
+      payload: '/select_option{"bullet_id": "5"}'
   utter_ask_name:
-    - text: "Please provide your name."
-
+  - text: Please provide your name.
   utter_ask_phone_number:
-    - text: "Please provide your phone number."
-
+  - text: Please provide your phone number.
   utter_ask_gpu_location:
-    - text: "Please provide your GPU location. (e.g., Geyzing, Rimbi, Yukson, Samdong GPU)"
-
+  - text: Please provide your GPU location. (e.g., Geyzing, Rimbi, Yukson, Samdong GPU)
   utter_application_confirm:
-    - text: "Your application for the {scheme_name} has been successfully submitted. We will contact you at {phone_number} soon."
-
+  - text: Your application for the {scheme_name} has been successfully submitted. We will contact you at {phone_number} soon.
   utter_scheme_details:
-    - text: |
-        Here are the details of the scheme:
-        {scheme_name}: {details}
+  - text: |
+      Here are the details of the scheme:
+      {scheme_name}: {details}
 
+  utter_apply_certificate_info:
+  - text: |
+      You can apply for certificates for the following services:  [sso.sikkim.gov.in](https://sso.sikkim.gov.in)
+      1. Register in Sikkim SSO: If not registered, visit [sso.sikkim.gov.in](https://sso.sikkim.gov.in) to Register/Create an Account.
+      2. Login using Sikkim SSO: Use your Sikkim SSO account to log in.
+      3. Fill up the Application Form: Enter applicant details and upload necessary documents.
+      4. Track Application: Keep track of application status. Notifications will be sent via SMS/Email, or you can check online.
 
-actions: 
-  - action_fetch_scheme_details
-  - action_submit_application
+      Certificates available:
+      - Primitive Tribe Certificate
+      - Scheduled Tribe Certificate
+      - Scheduled Caste Certificate
+      - OBC Certificate
+      - Employment Card
+      - Income Certificate
+      - Firm Registration Certificate
+
+  utter_get_emergency_contact:
+    - text: "Which department would you like to contact?"
+      buttons:
+        - title: "1. Police"
+          payload: '/select_option{"bullet_id": "1"}'
+        - title: "2. Health"
+          payload: '/select_option{"bullet_id": "2"}'
+        - title: "3. Fire"
+          payload: '/select_option{"bullet_id": "3"}'
+        - title: "4. Forest"
+          payload: '/select_option{"bullet_id": "4"}'
+
+  utter_ask_disaster_type:
+    - text: "Please specify the type of disaster (e.g., landslide, tree felling, animal bite)."
+
+  utter_ask_disaster_location:
+    - text: "Please provide the exact location of the disaster."
+  utter_disaster_report_submitted:
+    - text: "Thank you for reporting. We have noted down the disaster details and will take appropriate action. Stay safe!"
+
+actions:
+- utter_ask_name
+- action_fetch_scheme_details
+- utter_list_schemes_apply
+- utter_options
+- utter_application_confirm
+- utter_ask_phone_number
+- action_submit_application
+- utter_list_schemes_know
+- utter_greet
+- utter_ask_gpu_location
+- action_submit_disaster_form
+- action_give_emergency_contact
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

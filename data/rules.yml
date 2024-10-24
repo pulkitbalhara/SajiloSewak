@@ -3,15 +3,69 @@ version: "3.1"
 
 rules:
   - rule: User wants to know about a scheme
-    steps:
-      - intent: know_scheme
+    condition:
       - slot_was_set:
           - MainOption_selected: "1"
-      - action: utter_list_schemes
-
-  - rule: User wants to apply for a scheme
     steps:
-      - intent: apply_scheme
+      - action: utter_list_schemes_know
+      - intent: select_option
+        entities:
+          - bullet_id: "1"
+      - slot_was_set:
+          - bullet_selected: "1"
+      - action: action_fetch_scheme_details
+      - action: utter_more_options
+    wait_for_user_input: false
+
+  - rule: User wants to apply to a scheme - and start the form
+    condition:
       - slot_was_set:
           - MainOption_selected: "2"
-      - action: utter_list_schemes
+    steps:
+      - action: utter_list_schemes_apply
+      - intent: select_option
+        entities:
+          - bullet_id: "1"
+      - slot_was_set:
+          - bullet_selected: "1"
+      - action: scheme_apply_form
+      - active_loop: scheme_apply_form
+
+  - rule: Submit the scheme apply form
+    condition:
+      - active_loop: scheme_apply_form
+    steps:
+      - action: scheme_apply_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_submit_application
+      - action: utter_application_confirm
+      - action: utter_more_options
+    wait_for_user_input: false
+
+  - rule: Always follow utter_more_options with utter_options
+    steps:
+      - action: utter_more_options
+      - action: utter_options
+
+  - rule: Activate disaster report form
+    steps:
+      - intent: report_disaster
+      - action: report_disaster_form
+      - active_loop: report_disaster_form
+  
+
+  - rule: Submit the disaster report form
+    condition:
+      - active_loop: report_disaster_form
+    steps:
+      - action: report_disaster_form
+      - active_loop: null
+      - slot_was_set:
+          - requested_slot: null
+      - action: action_submit_disaster_form
+      - action: utter_disaster_report_submitted
+      - action: utter_more_options
+    wait_for_user_input: false
+  
